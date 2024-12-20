@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elephant 3D Model</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #4CAF50; /* Lively green background */
+      color: #fff; /* White text for contrast */
+    }
+
+    #container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+
+    .button-container {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px; /* Space between buttons */
+    }
+
+    .button {
+      padding: 15px 25px;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.3s, background-color 0.3s;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .about-btn { background-color: #FF8C00; }
+    .animation-btn { background-color: #32CD32; }
+    .trumpet-btn { background-color: #FF4500; } /* Changed from roar to trumpet */
+    .quiz-btn { background-color: #1E90FF; }
+
+    .button:hover { transform: scale(1.1); }
+
+    .bubble-container {
+      position: absolute;
+      top: 100px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 300px;
+      height: 70vh;
+      overflow-y: auto;
+    }
+
+    .bubble {
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s;
+      cursor: pointer;
+      text-align: left;
+      color: #fff; /* White text for contrast */
+    }
+
+    .bubble:hover {
+      transform: scale(1.05);
+    }
+
+    /* Colorful backgrounds for bubbles */
+    .appearance { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+    .size { background: linear-gradient(135deg, #6a82fb, #fc5c7d); }
+    .habitat { background: linear-gradient(135deg, #00c6ff, #0072ff); }
+    .behavior { background: linear-gradient(135deg, #ff416c, #ff4b2b); }
+    .diet { background: linear-gradient(135deg, #00d2ff, #3a7bd5); }
+    .reproduction { background: linear-gradient(135deg, #ff5f6d, #ffc371); }
+    .conservation { background: linear-gradient(135deg, #00b09b, #96c93d); }
+    .facts { background: linear-gradient(135deg, #e1eec3, #f05053); }
+
+    .popup-container {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      max-height: 80%;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .popup {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000;
+      padding: 8px; /* Reduced padding */
+      border-radius: 8px; /* Smaller border radius */
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+      margin-bottom: 8px; /* Space between popups */
+      transition: all 0.3s ease;
+      max-width: 220px; /* Set a maximum width */
+      font-size: 12px; /* Reduced font size */
+    }
+
+    .popup h2 {
+      margin: 0 0 6px; /* Adjusted margin */
+      font-size: 14px; /* Smaller font size for the heading */
+    }
+
+    .popup p {
+      margin: 0;
+      color: #000; /* Black text for contrast */
+    }
+
+    .popup.visible {
+      display: block;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <div class="button-container">
+    <button class="button about-btn" onclick="toggleAbout()">🐘 About Elephant</button>
+    <button class="button animation-btn" onclick="toggleAnimation()">🔄 Rotation</button>
+    <button class="button trumpet-btn" onclick="toggleTrumpet()">🐘 Trumpet!</button>
+    <button class="button quiz-btn" onclick="window.location.href='elephquiz1.html'">📚 Start Quiz</button>
+  </div>
+
+  <div class="large-paragraph">
+    Welcome to the Elephant 3D Model!
+  </div>
+
+  <div class="bubble-container">
+    <div class="bubble appearance" onclick="toggleBubble(this)">
+      <strong>Appearance:</strong>
+      <div class="bubble-content">
+        <p>Elephants are large mammals known for their long trunks, large ears, and tusks. Their skin is thick and gray, and they have a unique wrinkled texture.</p>
+      </div>
+    </div>
+    <div class="bubble size" onclick="toggleBubble(this)">
+      <strong>Size:</strong>
+      <div class="bubble-content">
+        <p>Elephants are the largest land animals. Adult males can weigh between 4,500 to 6,800 kg (10,000 to 15,000 lbs) and measure up to 4 meters (13 feet) tall at the shoulder.</p>
+      </div>
+    </div>
+    <div class="bubble habitat" onclick="toggleBubble(this)">
+      <strong>Habitat:</strong>
+      <div class="bubble-content">
+        <p>Elephants are found in various habitats including savannas, forests, and grasslands across Africa and Asia.</p>
+      </div>
+    </div>
+    <div class="bubble behavior" onclick="toggleBubble(this)">
+      <strong>Behavior:</strong>
+      <div class="bubble-content">
+        <p>Elephants are social animals that live in herds led by a matriarch. They communicate through vocalizations and body language.</p>
+      </div>
+    </div>
+    <div class="bubble diet" onclick="toggleBubble(this)">
+      <strong>Diet:</strong>
+      <div class="bubble-content">
+        <p>Elephants are herbivores and primarily eat grasses, leaves, fruits, and bark. They can consume up to 150 kg (330 lbs) of food in a single day.</p>
+      </div>
+    </div>
+    <div class="bubble reproduction" onclick="toggleBubble(this)">
+      <strong>Reproduction:</strong>
+      <div class="bubble-content">
+        <p>Elephants have a long gestation period of about 22 months, and typically give birth to a single calf.</p>
+      </div>
+    </div>
+    <div class="bubble conservation" onclick="toggleBubble(this)">
+      <strong>Conservation Status:</strong>
+      <div class="bubble-content">
+        <p>Elephants are listed as vulnerable due to habitat loss and poaching for their ivory tusks.</p>
+      </div>
+    </div>
+    <div class="bubble facts" onclick="toggleBubble(this)">
+      <strong>Interesting Facts:</strong>
+      <div class="bubble-content">
+        <p>Elephants can recognize themselves in mirrors and are known for their excellent memory.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-container" id="popupContainer"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="scripts/elephant.js"></script> <!-- Changed to elephantModel.js -->
+
+  <audio id="aboutAudio" src="sounds/elephant_info.mp3"></audio> <!-- Changed to elephant info -->
+  <audio id="trumpetAudio" src="sounds/elephant roar.mp3"></audio> <!-- Changed to trumpet sound -->
+
+  <script>
+    const aboutAudio = document.getElementById('aboutAudio');
+    const trumpetAudio = document.getElementById('trumpetAudio'); // Changed to trumpet audio
+
+    function toggleAbout() {
+      if (aboutAudio.paused) {
+        aboutAudio.play();
+        trumpetAudio.pause();
+      } else {
+        aboutAudio.pause();
+      }
+    }
+
+    function toggleTrumpet() {
+      if (trumpetAudio.paused) {
+        trumpetAudio.play();
+        aboutAudio.pause();
+      } else {
+        trumpetAudio.pause();
+      }
+    }
+
+    const funFacts = [
+      "An elephant's trunk has over 40,000 muscles!",
+      "Elephants can communicate using low-frequency sounds that humans cannot hear.",
+      "African elephants are larger than Asian elephants.",
+      "Elephants can live for up to 70 years in the wild.",
+      "Elephants use their ears to regulate body temperature."
+    ];
+
+    let factCount = 0;
+
+    function showFunFact() {
+      if (factCount < funFacts.length) {
+        const fact = funFacts[factCount];
+        const popupContainer = document.getElementById('popupContainer');
+
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        const colors = ['#FF8C00', '#32CD32', '#FF4500', '#1E90FF', '#FFD700'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        popup.style.backgroundColor = randomColor; // Random background color for popups
+        popup.innerHTML = `<h2>Fun Fact!</h2><p>${fact}</p>`;
+
+        popupContainer.appendChild(popup);
+        factCount++;
+      }
+    }
+
+    setInterval(showFunFact, 5000);
+
+    function toggleBubble(bubble) {
+      bubble.classList.toggle('expanded');
+    }
+  </script>
+</body>
+</html>

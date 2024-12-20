@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horse 3D Model</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: darkgoldenrod; /* Lively horse-like background */
+      color: #fff; /* White text for contrast */
+    }
+
+    #container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+
+    }
+
+
+  
+    .button-container {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px; /* Space between buttons */
+    }
+
+    .button {
+      padding: 15px 25px;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.3s, background-color 0.3s;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .about-btn { background-color: #FF8C00; }
+    .animation-btn { background-color: #32CD32; }
+    .roar-btn { background-color: #FF4500; }
+    .quiz-btn { background-color: #1E90FF; }
+
+    .button:hover { transform: scale(1.1); }
+
+    .bubble-container {
+      position: absolute;
+      top: 100px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 300px;
+      height: 70vh;
+      overflow-y: auto;
+    }
+
+    .bubble {
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s;
+      cursor: pointer;
+      text-align: left;
+      color: #fff; /* White text for contrast */
+    }
+
+    .bubble:hover {
+      transform: scale(1.05);
+    }
+
+    /* Colorful backgrounds for bubbles */
+    .appearance { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+    .size { background: linear-gradient(135deg, #6a82fb, #fc5c7d); }
+    .habitat { background: linear-gradient(135deg, #00c6ff, #0072ff); }
+    .behavior { background: linear-gradient(135deg, #ff416c, #ff4b2b); }
+    .diet { background: linear-gradient(135deg, #00d2ff, #3a7bd5); }
+    .reproduction { background: linear-gradient(135deg, #ff5f6d, #ffc371); }
+    .conservation { background: linear-gradient(135deg, #00b09b, #96c93d); }
+    .facts { background: linear-gradient(135deg, #e1eec3, #f05053); }
+
+    .popup-container {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      max-height: 80%;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .popup {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000;
+      padding: 8px; /* Reduced padding */
+      border-radius: 8px; /* Smaller border radius */
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+      margin-bottom: 8px; /* Space between popups */
+      transition: all 0.3s ease;
+      max-width: 220px; /* Set a maximum width */
+      font-size: 12px; /* Reduced font size */
+    }
+
+    .popup h2 {
+      margin: 0 0 6px; /* Adjusted margin */
+      font-size: 14px; /* Smaller font size for the heading */
+    }
+
+    .popup p {
+      margin: 0;
+      color: #000; /* Black text for contrast */
+    }
+
+    .popup.visible {
+      display: block;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <div class="button-container">
+    <button class="button about-btn" onclick="toggleAbout()">🐎 About Horse</button>
+    <button class="button animation-btn" onclick="toggleAnimation()">🔄 Rotation</button>
+    <button class="button roar-btn" onclick="toggleRoar()">🐎 Neigh!</button>
+    <button class="button quiz-btn" onclick="window.location.href='horsequiz1.html'">📚 Start Quiz</button>
+  </div>
+
+
+ 
+  <!-- New paragraphs -->
+  <div class="bubble-container">
+    <div class="bubble appearance" onclick="toggleBubble(this)">
+      <strong>Appearance:</strong>
+      <div class="bubble-content"></div>
+      <p>Horses have strong, muscular bodies with long legs and deep chests, allowing for speed and endurance. They possess expressive eyes and sensitive ears, complemented by long, flowing manes and tails. Their coats come in various colors and patterns, adding to their beauty. Strong hooves are essential for their mobility and overall health</p>
+</div>
+<div class="bubble size" onclick="toggleBubble(this)">
+
+    <strong>Size</strong>
+    <div class="bubble-content">
+    <p> Horses vary in size depending on the breed, but most horses stand between 1.4 to 1.8 meters (14 to 18 hands) tall at the shoulder. Their weight can range from 400 to over 900 kg (880 to 2,000 lbs), with lighter breeds like Arabians and heavier draft horses like Clydesdales.
+    </p>
+    </div>
+</div>
+<div class="bubble habitat" onclick="toggleBubble(this)">
+
+
+    <strong>Habitat</strong>
+    <div class="bubble-content">
+
+    <p>- Horses are domestic animals and can be found worldwide. They thrive in a wide variety of climates, from grasslands and plains to mountains and deserts.Wild horses, like the mustangs of North America and the Przewalski’s horse of Mongolia, live in open grasslands and steppes.
+    </p>
+  </div>
+</div>
+
+<div class="bubble behavior" onclick="toggleBubble(this)">
+  <strong>Behavior:</strong>
+  <div class="bubble-content">
+    
+  
+    <p>Herd Animals: Horses are social animals that live in herds. In the wild, they form tightly knit groups led by a dominant mare and protected by a stallion.
+    </p>
+    <p>Flight Instinct: Horses are prey animals, and their primary defense mechanism is flight. They rely on their speed and agility to escape predators.
+    </p>
+  </div>
+</div>
+
+<div class="bubble diet" onclick="toggleBubble(this)">
+  <strong>Diet:</strong>
+  <div class="bubble-content">
+  
+    <p>Horses are herbivores and graze primarily on grasses. In domesticated settings, they are often fed hay, grains, and other supplements.
+    </p >
+    <p>They have large appetites and can consume up to 2% of their body weight in food each day, grazing for up to 16 hours a day.
+    </p>
+
+  </div>
+</div>
+<div class="bubble reproduction" onclick="toggleBubble(this)">
+  <strong>Reproduction:</strong>
+  <div class="bubble-content">
+  
+    <p>Mating: Horses typically mate in the spring, and the foals are born the following spring,
+       ensuring the best chance of survival.Gestation:
+       The gestation period for horses is about 11 to 12 months.Foals: 
+       A mare usually gives birth to one foal, which is able to stand and walk within 
+       hours of birth. Foals nurse from their mother for several months.
+    </p>
+
+  </div>
+</div>
+
+<div class="bubble facts" onclick="toggleBubble(this)">
+  <strong>Interesting Facts:</strong>
+  <div class="bubble-content">
+  
+    
+    <p>Speed: Horses can run at speeds up to 55 miles per hour (88 km/h), with some breeds excelling in short sprints while others excel in endurance.Communication: Horses communicate with each other through vocalizations, body language, and ear movement. They are known to form strong bonds with other horses and even with humans.Vision: Horses have one of the largest eyes of any land mammal and possess nearly 360-degree vision. However, they have blind spots directly in front and behind them.Domestication: Horses were first domesticated around 6,000 years ago on the steppes of Central Asia. They have been integral to human culture, providing transportation, labor, and companionship.
+    </p>
+  </div>
+</div>
+ </div>
+
+ <div class="popup-container" id="popupContainer"></div>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="scripts/horse.js"></script>
+
+  <!-- Add the audio files -->
+  <audio id="aboutAudio" src="sounds/Horses__info.mp3"></audio>
+  <audio id="roarAudio" src="sounds/horseaudio.mp3"></audio>
+
+  <script>
+    const aboutAudio = document.getElementById('aboutAudio');
+    const roarAudio = document.getElementById('roarAudio');
+
+    function toggleAbout() {
+      if (aboutAudio.paused) {
+        aboutAudio.play();
+        roarAudio.pause(); // Pause roar if it's playing
+      } else {
+        aboutAudio.pause();
+      }
+    }
+
+    function toggleRoar() {
+      if (roarAudio.paused) {
+        roarAudio.play();
+        aboutAudio.pause(); // Pause about audio if it's playing
+      } else {
+        roarAudio.pause();
+      }
+    }
+    const funFacts = [
+      "Horses can run really fast! The fastest racehorses can reach speeds of up to 40 miles per hour. That’s as fast as a car driving through a neighborhood!",
+      "Horses have an amazing sense of smell. They can detect scents from over a mile away, which helps them sense danger in the wild.",
+      "Horses can live a long time! Many horses live to be 25 years old or more, and some even reach their 30s with good care.",
+      "There are over 300 different breeds of horses, and they come in all shapes and sizes. Some horses, like the Shetland pony, are very small, while others, like the Clydesdale, are huge!",
+      "Horses are very social creatures and love to be around other horses. They communicate with each other using sounds, body language, and even facial expressions!"
+    ];
+
+    let factCount = 0;
+
+    function showFunFact() {
+      if (factCount < funFacts.length) {
+        const fact = funFacts[factCount];
+        const popupContainer = document.getElementById('popupContainer');
+
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        const colors = ['#FF8C00', '#32CD32', '#FF4500', '#1E90FF', '#FFD700'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        popup.style.backgroundColor = randomColor; // Random background color for popups
+        popup.innerHTML = `<h2>Fun Fact!</h2><p>${fact}</p>`; // Corrected syntax
+
+        popupContainer.appendChild(popup);
+        factCount++;
+      }
+    }
+
+    setInterval(showFunFact, 5000);
+
+    function toggleBubble(bubble) {
+      bubble.classList.toggle('expanded');
+    }
+
+  
+  </script>
+</body>
+</html>

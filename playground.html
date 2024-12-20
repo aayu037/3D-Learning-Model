@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground Fun Quiz</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+        }
+        h1 {
+            color: #ff6347;
+            font-size: 2.5em;
+        }
+        form {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question img {
+            width: 150px;
+            height: 150px;
+        }
+        button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #ff6347;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff4500;
+        }
+    </style>
+</head>
+<body>
+    <h1>Playground Fun Quiz</h1>
+    <form id="quiz-form">
+        <div class="question">
+            <label>1. What color is the slide?</label><br>
+            <img src="slide.png" alt="Slide"><br>
+            <input type="radio" name="q1" value="Red"> Red<br>
+            <input type="radio" name="q1" value="Blue"> Blue<br>
+        </div>
+
+        <div class="question">
+            <label>2. What animal do you see in the playground?</label><br>
+            <img src="playground-animal.png" alt="Playground Animal"><br>
+            <input type="radio" name="q2" value="Dog"> Dog<br>
+            <input type="radio" name="q2" value="Cat"> Cat<br>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let score = 0;
+            const answers = {
+                q1: 'Red',
+                q2: 'Dog'
+            };
+
+            // Check answers
+            for (let question in answers) {
+                const selectedAnswer = document.querySelector(`input[name="${question}"]:checked`);
+                if (selectedAnswer && selectedAnswer.value === answers[question]) {
+                    score++;
+                }
+            }
+
+            alert(`Yay! You scored: ${score}/2`);
+        });
+    </script>
+</body>
+</html>

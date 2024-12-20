@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to 3D Learning, an interactive learning experience for kids with engaging 3D models.">
+    <title>3D Learning Experience</title>
+    <style>
+        /* Background video styles */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.7);
+            background: none;
+        }
+
+        /* General page styling */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+        }
+
+        /* Heading styling */
+        .comment p {
+            font-size: 48px;
+            font-weight: bold;
+            color: #42e7d9;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Centered container styling */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Button styling */
+        .start-button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #ffeb3b;
+            color: #333;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            text-align: center;
+        }
+
+        /* Button hover effect */
+        .start-button:hover {
+            background-color: #ffc107;
+            transform: scale(1.1);
+        }
+
+        /* Link styling within button */
+        .start-button a {
+            text-decoration: none;
+            color: inherit;
+            font-style: italic;
+        }
+
+        /* Links section styling */
+        .links-section {
+            display: flex;
+            gap: 30px;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        .links-section a {
+            color: #42e7d9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .links-section a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Social media icons */
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: #42e7d9;
+            font-size: 24px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Footer styling */
+        footer {
+            position: fixed;
+            bottom: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Background video -->
+    <video class="video-background" autoplay muted loop>
+        <source src="sounds/backk.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Heading -->
+    <div class="comment">
+        <p>Welcome to 3D Learning</p>
+    </div>
+
+    <!-- Centered button -->
+    <div class="container">
+        <button class="start-button"><a href="selection.html">Start Learning</a></button>
+    </div>
+
+    <!-- Links section -->
+  <!--  <div class="links-section">
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </div> -->
+ 
+ 
+    <!-- Social Media Links -->
+  <!--   <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" title="Facebook">📘</a>
+        <a href="https://twitter.com" target="_blank" title="Twitter">🐦</a>
+        <a href="https://instagram.com" target="_blank" title="Instagram">📸</a>
+    </div> -->
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 3D Learning | Designed by G2
+    </footer>
+</body>
+</html>

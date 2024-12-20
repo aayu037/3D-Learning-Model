@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lion 3D Model</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: darkgoldenrod; /* Lively lion-like background */
+      color: #fff; /* White text for contrast */
+    }
+
+    #container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+
+    .button-container {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px; /* Space between buttons */
+    }
+
+    .button {
+      padding: 15px 25px;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.3s, background-color 0.3s;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .about-btn { background-color: #FF8C00; }
+    .animation-btn { background-color: #32CD32; }
+    .roar-btn { background-color: #FF4500; }
+    .quiz-btn { background-color: #1E90FF; }
+
+    .button:hover { transform: scale(1.1); }
+
+    .bubble-container {
+      position: absolute;
+      top: 100px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 300px;
+      height: 70vh;
+      overflow-y: auto;
+    }
+
+    .bubble {
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s;
+      cursor: pointer;
+      text-align: left;
+      color: #fff; /* White text for contrast */
+    }
+
+    .bubble:hover {
+      transform: scale(1.05);
+    }
+
+    /* Colorful backgrounds for bubbles */
+    .appearance { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+    .size { background: linear-gradient(135deg, #6a82fb, #fc5c7d); }
+    .habitat { background: linear-gradient(135deg, #00c6ff, #0072ff); }
+    .behavior { background: linear-gradient(135deg, #ff416c, #ff4b2b); }
+    .diet { background: linear-gradient(135deg, #00d2ff, #3a7bd5); }
+    .reproduction { background: linear-gradient(135deg, #ff5f6d, #ffc371); }
+    .conservation { background: linear-gradient(135deg, #00b09b, #96c93d); }
+    .facts { background: linear-gradient(135deg, #e1eec3, #f05053); }
+
+    .popup-container {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      max-height: 80%;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .popup {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000;
+      padding: 8px; /* Reduced padding */
+      border-radius: 8px; /* Smaller border radius */
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+      margin-bottom: 8px; /* Space between popups */
+      transition: all 0.3s ease;
+      max-width: 220px; /* Set a maximum width */
+      font-size: 12px; /* Reduced font size */
+    }
+
+    .popup h2 {
+      margin: 0 0 6px; /* Adjusted margin */
+      font-size: 14px; /* Smaller font size for the heading */
+    }
+
+    .popup p {
+      margin: 0;
+      color: #000; /* Black text for contrast */
+    }
+
+    .popup.visible {
+      display: block;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <div class="button-container">
+    <button class="button about-btn" onclick="toggleAbout()">🦁 About Lion</button>
+    <button class="button animation-btn" onclick="toggleAnimation()">🔄 Rotation</button>
+    <button class="button roar-btn" onclick="toggleRoar()">🐾 Roar!</button>
+    <button class="button quiz-btn" onclick="window.location.href='lionquiz1.html'">📚 Start Quiz</button>
+
+  </div>
+
+  <div class="bubble-container">
+    <div class="bubble appearance" onclick="toggleBubble(this)">
+      <strong>Appearance:</strong>
+      <div class="bubble-content">
+        <p>Lions are muscular, deep-chested cats with short, rounded heads, reduced necks, and round ears. Males are easily recognizable by their thick manes, which can range in color from light blonde to dark brown.</p>
+      </div>
+    </div>
+    <div class="bubble size" onclick="toggleBubble(this)">
+      <strong>Size:</strong>
+      <div class="bubble-content">
+        <p>Lions are the second largest big cats after tigers. Males typically weigh between 150 to 250 kg (330 to 550 lbs), and females weigh between 120 to 182 kg (265 to 400 lbs).</p>
+      </div>
+    </div>
+    <div class="bubble habitat" onclick="toggleBubble(this)">
+      <strong>Habitat:</strong>
+      <div class="bubble-content">
+        <p>Lions are primarily found in Africa, with a small population in the Gir Forest of India. Their habitats include savannas, grasslands, and open woodlands.</p>
+      </div>
+    </div>
+    <div class="bubble behavior" onclick="toggleBubble(this)">
+      <strong>Behavior:</strong>
+      <div class="bubble-content">
+        <p>Lions are the most social of all big cats and live in groups called prides, typically consisting of related females and their offspring, along with a few adult males.</p>
+      </div>
+    </div>
+    <div class="bubble diet" onclick="toggleBubble(this)">
+      <strong>Diet:</strong>
+      <div class="bubble-content">
+        <p>Lions are carnivores, primarily hunting large herbivores like antelopes, zebras, and wildebeests. They can consume up to 40 kg (88 lbs) of meat in one sitting.</p>
+      </div>
+    </div>
+    <div class="bubble reproduction" onclick="toggleBubble(this)">
+      <strong>Reproduction:</strong>
+      <div class="bubble-content">
+        <p>Lions mate throughout the year, with a gestation period of around 110 days, and a lioness typically gives birth to 1 to 4 cubs.</p>
+      </div>
+    </div>
+    <div class="bubble conservation" onclick="toggleBubble(this)">
+      <strong>Conservation Status:</strong>
+      <div class="bubble-content">
+        <p>Lions are considered vulnerable, with fewer than 20,000 individuals left in the wild due to habitat loss, human-wildlife conflict, and poaching.</p>
+      </div>
+    </div>
+    <div class="bubble facts" onclick="toggleBubble(this)">
+      <strong>Interesting Facts:</strong>
+      <div class="bubble-content">
+        <p>Lions can reach speeds of up to 50 miles per hour (80 km/h) in short bursts, and a lion's roar can be heard up to 5 miles (8 km) away.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-container" id="popupContainer"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="scripts/lion.js"></script>
+
+  <audio id="aboutAudio" src="sounds/Lions__info.mp3"></audio>
+  <audio id="roarAudio" src="sounds/lion.mp3"></audio>
+
+  <script>
+    const aboutAudio = document.getElementById('aboutAudio');
+    const roarAudio = document.getElementById('roarAudio');
+
+    function toggleAbout() {
+      if (aboutAudio.paused) {
+        aboutAudio.play();
+        roarAudio.pause();
+      } else {
+        aboutAudio.pause();
+      }
+    }
+
+    function toggleRoar() {
+      if (roarAudio.paused) {
+        roarAudio.play();
+        aboutAudio.pause();
+      } else {
+        roarAudio.pause();
+      }
+    }
+
+    const funFacts = [
+      "Lions are often referred to as the King of the Jungle, though they primarily inhabit savannas and grasslands.",
+      "Hear that? That's the sound of a lion roaring, a call to communicate and assert dominance.",
+      "Lion cubs are born with spots to help camouflage them in long grass.",
+      "A female lion needs 5 kg of meat per day, while a male lion needs 7 kg or more.",
+      "Lions live in groups called prides, which can have up to 30 lions."
+    ];
+
+    let factCount = 0;
+
+    function showFunFact() {
+      if (factCount < funFacts.length) {
+        const fact = funFacts[factCount];
+        const popupContainer = document.getElementById('popupContainer');
+
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        const colors = ['#FF8C00', '#32CD32', '#FF4500', '#1E90FF', '#FFD700'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        popup.style.backgroundColor = randomColor; // Random background color for popups
+        popup.innerHTML = `<h2>Fun Fact!</h2><p>${fact}</p>`; // Corrected syntax
+
+        popupContainer.appendChild(popup);
+        factCount++;
+      }
+    }
+
+    setInterval(showFunFact, 5000);
+
+    function toggleBubble(bubble) {
+      bubble.classList.toggle('expanded');
+    }
+  </script>
+</body>
+</html>

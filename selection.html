@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Selection</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #A8E6CE; /* Soft green background */
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 2.5em;
+      color: #FF6F61; /* Bright color for heading */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    }
+
+    .animal {
+      margin: 15px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid #FFA726; /* Border color matching the theme */
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.3s;
+      background: #FFCC80; /* Light orange background for animal cards */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .animal:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
+    }
+
+    .animal img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .animal p {
+      margin: 0;
+      padding: 10px;
+      font-size: 22px;
+      border-radius: 0 0 10px 10px;
+      background-color: #FF6F61; /* Matching color for text background */
+      color: white; /* Text color */
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Shadow for contrast */
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Select an Animal</h1>
+
+  <div class="container">
+    <!-- Updated Tiger Redirect -->
+    <div class="animal" onclick="redirectTo3DModel('tiger')">
+      <img src="images/tiger.png.jpg" alt="Tiger">
+      <p>Tiger</p>
+    </div>
+
+    <div class="animal" onclick="redirectTo3DModel('elephant')">
+      <img src="images/elephant.jpg" alt="Elephant">
+      <p>Elephant</p>
+    </div>
+
+    <div class="animal" onclick="redirectTo3DModel('lion')">
+      <img src="images/lion.jpg" alt="Lion">
+      <p>Lion</p>
+    </div>
+
+    <div class="animal" onclick="redirectTo3DModel('horse')">
+      <img src="images/horse.jpeg" alt="Horse">
+      <p>Horse</p>
+    </div>
+  </div>
+
+  <script>
+    function redirectTo3DModel(animal) {
+      if(animal === 'tiger','lion','horse','elephant') {
+        window.location.href = animal + ".html";  // Redirect to tigermodel.html
+      } else {
+        window.location.href = animal + "-model.html";  // Default behavior for other animals
+      }
+    }
+  </script>
+</body>
+</html>

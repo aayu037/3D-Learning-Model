@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiger Fun Quiz - Level 2</title>
+    <style>
+         body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFE4B5, #FF6347); /* Warm sunset-like colors */
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #FFF;
+            background-color: #FF4500; /* Bold orange-red for header */
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFF8DC;
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .tiger-image {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin: 20px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #FF4500;
+            text-align: left;
+            width: 100%;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+        .options label {
+            background-color: #FFB6C1; /* Soft pink for options */
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+        }
+        .options label:hover {
+            background-color: #FF69B4; /* Darker pink on hover */
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.35);
+        }
+        .options input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .submit-btn, .next-btn, .retake-btn {
+            display: none;
+            padding: 12px 30px;
+            background-color: #4682B4; /* Steel blue for buttons */
+            color: white;
+            border: none;
+            border-radius: 30px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .submit-btn:hover, .next-btn:hover, .retake-btn:hover {
+            background-color: #5F9EA0; /* Teal blue on hover */
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+        }
+        .result {
+            display: none;
+            font-size: 1.5em;
+            color: #DC143C; /* Crimson red for results */
+            margin-top: 20px;
+        }
+        .wrong {
+            color: #8B0000; /* Dark red for wrong answers */
+        }
+        .correct-answers {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .correct-answers ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .correct-answers li {
+            margin: 5px 0;
+            background-color: #FFEFD5; /* Light peach */
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tiger Fun Quiz - Level 2</h1>
+
+    <div class="quiz-container">
+        <img src="images/tiger.png-removebg-preview.png" alt="Tiger" class="tiger-image"> <!-- Image placed here -->
+        
+        <div class="question">
+            <p>Question 1: What color are most tigers?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="correct"> Orange with black stripes</label>
+                <label><input type="radio" name="q1" value="wrong"> Green with yellow spots</label>
+                <label><input type="radio" name="q1" value="wrong"> Blue with white stripes</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>Question 2: What sound does a tiger make?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="wrong"> Oink</label>
+                <label><input type="radio" name="q2" value="wrong"> Meow</label>
+                <label><input type="radio" name="q2" value="correct"> Roar</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>Question 3: What do tigers mostly eat?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="wrong"> Grass</label>
+                <label><input type="radio" name="q3" value="correct"> Meat</label>
+                <label><input type="radio" name="q3" value="wrong"> Fruits</label>
+            </div>
+        </div>
+
+        <!-- Submit button -->
+        <button id="submit-btn" class="submit-btn" onclick="submitQuiz()">Submit</button>
+
+        <!-- Next Level button -->
+        <button id="next-btn" class="next-btn" onclick="nextLevel()">Next Level</button>
+
+        <!-- Retake button -->
+        <button id="retake-btn" class="retake-btn" onclick="retakeQuiz()">Retake Quiz</button>
+
+        <div id="result" class="result"></div>
+        <div id="wrong" class="result wrong"></div>
+        <div id="correct-answers" class="correct-answers">
+            <p>Correct Answers:</p>
+            <ul>
+                <li>Q1: Orange with black stripes</li>
+                <li>Q2: Roar</li>
+                <li>Q3: Meat</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            let correctAnswers = 0;
+
+            // Check if the correct answer is selected for each question
+            if (document.querySelector('input[name="q1"]:checked')?.value === 'correct') correctAnswers++;
+            if (document.querySelector('input[name="q2"]:checked')?.value === 'correct') correctAnswers++;
+            if (document.querySelector('input[name="q3"]:checked')?.value === 'correct') correctAnswers++;
+
+           
+            const resultDiv = document.getElementById('result');
+            const wrongDiv = document.getElementById('wrong');
+            const correctAnswersDiv = document.getElementById('correct-answers');
+
+            correctAnswersDiv.style.display = 'block';
+
+            if (correctAnswers === 3) {
+                resultDiv.textContent = "Great job! You answered all correctly!";
+                resultDiv.style.display = 'block';
+            } else {
+                wrongDiv.textContent = `You got ${correctAnswers} out of 3 correct.`;
+                wrongDiv.style.display = 'block';
+                document.getElementById('retake-btn').style.display = 'block';
+            }
+
+            document.getElementById('next-btn').style.display = 'block';
+            document.getElementById('submit-btn').style.display = 'none';
+        }
+
+        function nextLevel() {
+            window.location.href = 'tigerquiz3.html';
+        }
+
+        function retakeQuiz() {
+            window.location.reload();
+        }
+
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                const allAnswered = document.querySelector('input[name="q1"]:checked') &&
+                                    document.querySelector('input[name="q2"]:checked') &&
+                                    document.querySelector('input[name="q3"]:checked');
+
+                if (allAnswered) {
+                    document.getElementById('submit-btn').style.display = 'block';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

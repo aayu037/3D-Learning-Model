@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiger 3D Model</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #4CAF50; /* Lively green background */
+      color: #fff; /* White text for contrast */
+    }
+
+    #container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+
+    .button-container {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px; /* Space between buttons */
+    }
+
+    .button {
+      padding: 15px 25px;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.3s, background-color 0.3s;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .about-btn { background-color: #FF8C00; }
+    .animation-btn { background-color: #32CD32; }
+    .roar-btn { background-color: #FF4500; }
+    .quiz-btn { background-color: #1E90FF; }
+
+    .button:hover { transform: scale(1.1); }
+
+    .bubble-container {
+      position: absolute;
+      top: 100px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 300px;
+      height: 70vh;
+      overflow-y: auto;
+    }
+
+    .bubble {
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s;
+      cursor: pointer;
+      text-align: left;
+      color: #fff; /* White text for contrast */
+    }
+
+    .bubble:hover {
+      transform: scale(1.05);
+    }
+
+    /* Colorful backgrounds for bubbles */
+    .appearance { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+    .size { background: linear-gradient(135deg, #6a82fb, #fc5c7d); }
+    .habitat { background: linear-gradient(135deg, #00c6ff, #0072ff); }
+    .behavior { background: linear-gradient(135deg, #ff416c, #ff4b2b); }
+    .diet { background: linear-gradient(135deg, #00d2ff, #3a7bd5); }
+    .reproduction { background: linear-gradient(135deg, #ff5f6d, #ffc371); }
+    .conservation { background: linear-gradient(135deg, #00b09b, #96c93d); }
+    .facts { background: linear-gradient(135deg, #e1eec3, #f05053); }
+
+    .popup-container {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      max-height: 80%;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .popup {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000;
+      padding: 8px; /* Reduced padding */
+      border-radius: 8px; /* Smaller border radius */
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+      margin-bottom: 8px; /* Space between popups */
+      transition: all 0.3s ease;
+      max-width: 220px; /* Set a maximum width */
+      font-size: 12px; /* Reduced font size */
+    }
+
+    .popup h2 {
+      margin: 0 0 6px; /* Adjusted margin */
+      font-size: 14px; /* Smaller font size for the heading */
+    }
+
+    .popup p {
+      margin: 0;
+      color: #000; /* Black text for contrast */
+    }
+
+    .popup.visible {
+      display: block;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <div class="button-container">
+    <button class="button about-btn" onclick="toggleAbout()">🦁 About Tiger</button>
+    <button class="button animation-btn" onclick="toggleAnimation()">🔄 Rotation</button>
+    <button class="button roar-btn" onclick="toggleRoar()">🐯 Roar!</button>
+    <button class="button quiz-btn" onclick="window.location.href='tigerquiz1.html'">📚 Start Quiz</button>
+  </div>
+
+  <div class="large-paragraph">
+    Welcome to the Tiger 3D Model!
+  </div>
+
+  <div class="bubble-container">
+    <div class="bubble appearance" onclick="toggleBubble(this)">
+      <strong>Appearance:</strong>
+      <div class="bubble-content">
+        <p>Tigers are large, powerful felines with a distinctive orange coat and black stripes. Their fur can also be white with black stripes, known as the Bengal white tiger. They have muscular bodies, long legs, and a long, thick tail.</p>
+      </div>
+    </div>
+    <div class="bubble size" onclick="toggleBubble(this)">
+      <strong>Size:</strong>
+      <div class="bubble-content">
+        <p>Tigers are the largest of the big cats. Males can weigh between 180 to 320 kg (400 to 700 lbs) and measure up to 3.3 meters (10.8 feet) from head to tail. Females are generally smaller.</p>
+      </div>
+    </div>
+    <div class="bubble habitat" onclick="toggleBubble(this)">
+      <strong>Habitat:</strong>
+      <div class="bubble-content">
+        <p>Tigers are native to Asia and can be found in various habitats, including tropical forests, grasslands, and savannas. Historically, they roamed across much of Asia, but today their range has been significantly reduced.</p>
+      </div>
+    </div>
+    <div class="bubble behavior" onclick="toggleBubble(this)">
+      <strong>Behavior:</strong>
+      <div class="bubble-content">
+        <p>Tigers are solitary animals and usually live alone, except for mothers with cubs or during mating. They mark their territory with scent markings and vocalizations.</p>
+      </div>
+    </div>
+    <div class="bubble diet" onclick="toggleBubble(this)">
+      <strong>Diet:</strong>
+      <div class="bubble-content">
+        <p>Tigers are carnivorous and primarily hunt large prey, such as deer, wild boar, and sometimes even young elephants or rhinos. They can eat up to 40 kg (88 lbs) of meat in a single meal.</p>
+      </div>
+    </div>
+    <div class="bubble reproduction" onclick="toggleBubble(this)">
+      <strong>Reproduction:</strong>
+      <div class="bubble-content">
+        <p>Tigers breed throughout the year, but most births occur in the winter. The gestation period is about 93 to 112 days, and a litter usually consists of 2 to 4 cubs.</p>
+      </div>
+    </div>
+    <div class="bubble conservation" onclick="toggleBubble(this)">
+      <strong>Conservation Status:</strong>
+      <div class="bubble-content">
+        <p>Tigers are listed as endangered, with fewer than 4,000 individuals remaining in the wild. The primary threats to their survival include habitat loss and poaching.</p>
+      </div>
+    </div>
+    <div class="bubble facts" onclick="toggleBubble(this)">
+      <strong>Interesting Facts:</strong>
+      <div class="bubble-content">
+        <p>Each tiger has a unique pattern of stripes, much like human fingerprints. They are strong swimmers and can swim long distances to hunt or cool off.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-container" id="popupContainer"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="scripts/tigerModel.js"></script>
+
+  <audio id="aboutAudio" src="sounds/tiger_info.mp3"></audio>
+  <audio id="roarAudio" src="sounds/tigerroar.mp3"></audio>
+
+  <script>
+    const aboutAudio = document.getElementById('aboutAudio');
+    const roarAudio = document.getElementById('roarAudio');
+
+    function toggleAbout() {
+      if (aboutAudio.paused) {
+        aboutAudio.play();
+        roarAudio.pause();
+      } else {
+        aboutAudio.pause();
+      }
+    }
+
+    function toggleRoar() {
+      if (roarAudio.paused) {
+        roarAudio.play();
+        aboutAudio.pause();
+      } else {
+        roarAudio.pause();
+      }
+    }
+
+    const funFacts = [
+      "A tiger's stripes are like fingerprints; no two are alike!",
+      "Tigers can leap over 10 feet in a single jump!",
+      "The Sumatran tiger is the smallest subspecies of tiger.",
+      "Tigers can weigh up to 670 pounds (around 300 kg)!",
+      "Unlike most big cats, tigers love to swim and are great swimmers!"
+    ];
+
+    let factCount = 0;
+
+    function showFunFact() {
+      if (factCount < funFacts.length) {
+        const fact = funFacts[factCount];
+        const popupContainer = document.getElementById('popupContainer');
+
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        const colors = ['#FF8C00', '#32CD32', '#FF4500', '#1E90FF', '#FFD700'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        popup.style.backgroundColor = randomColor; // Random background color for popups
+        popup.innerHTML = `<h2>Fun Fact!</h2><p>${fact}</p>`; // Corrected syntax
+
+        popupContainer.appendChild(popup);
+        factCount++;
+      }
+    }
+
+    setInterval(showFunFact, 5000);
+
+    function toggleBubble(bubble) {
+      bubble.classList.toggle('expanded');
+    }
+  </script>
+</body>
+</html>
